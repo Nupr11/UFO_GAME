@@ -1,0 +1,240 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+:root {
+  --content-size: calc(50%-590px);
+  --game-size: calc(50%-400px);
+  --main-padding: 8em;
+  --large-padding: 3em;
+  --medium-padding: 2em;
+  --short-padding: 1em;
+  --short-gap: 0.5em;
+  --large-gap: 1.5em;
+  --main-color: rgb(6, 9, 18, 0.7);
+  --second-color: rgb(248, 252, 254, 0.7);
+  --main-gradient: linear-gradient(
+    180deg,
+    rgb(20, 35, 61, 0.8),
+    rgba(215, 253, 247, 0.89)
+  );
+  --radius: 1%;
+  --shadow: 0 0 50px 10px;
+  --font-primary: 1em/ 1.1em;
+  --font-secondary: 0.6em/ 0.9em;
+}
+
+.container,
+.game,
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  font: var(--font-primary) "orbitron-medium", sans-serif;
+}
+
+.container {
+  position: relative;
+  padding: var(--main-padding) var(--content-size);
+  height: 100vh;
+  width: 100%;
+  background: url("/assets/img/ufo-bg.jpeg") no-repeat center / cover;
+}
+
+.game {
+  width: 100%;
+  max-width: 1280px;
+  /* padding: var(--short-padding); */
+  background: var(--main-gradient);
+  box-shadow: var(--shadow) var(--main-color);
+  z-index: -30;
+}
+
+.game.active {
+  z-index: 10;
+}
+
+.game_dashboard,
+.game_dashboard-box {
+  display: flex;
+  justify-content: start;
+  filter: blur(0.5px);
+  color: var(--second-color);
+}
+
+.game_dashboard {
+  width: 100%;
+  gap: var(--large-gap);
+  background-color: var(--main-color);
+  box-shadow: var(--shadow) var(--second-color);
+  transform: translateY(-100%);
+  transition: 0.3s;
+}
+
+.game_dashboard.active {
+  transform: translateY(0%);
+}
+
+.game_dashboard-box {
+  padding: var(--short-padding);
+  gap: var(--short-gap);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.game_field {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  gap: var(--large-padding);
+  background: local url("/assets/img/ground11.jpg") no-repeat center / cover;
+  background-color: rgba(0, 0, 0, 0.663);
+  opacity: 0.9;
+  filter: blur(1px);
+}
+
+.car,
+.ufo {
+  position: absolute;
+}
+
+.ufo {
+  width: 40px;
+  height: 40px;
+  z-index: 50;
+}
+
+.heliport {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(14, 122, 194);
+  box-shadow: 0 0 5px 5px rgb(14, 122, 194);
+}
+
+.car {
+  width: 50px;
+  height: 50px;
+  z-index: 40;
+}
+
+.house {
+  width: 80px;
+  height: 80px;
+  background: url("/assets/img/grass-2.jpeg");
+  background-color: red;
+}
+
+.form,
+.form-input,
+.form-button {
+  border-radius: var(--radius);
+  border: 0;
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  z-index: -20;
+  display: none;
+  padding: var(--short-padding) var(--medium-padding);
+  width: max-content;
+  transform: translateY(-50%);
+  background: var(--main-color);
+  box-shadow: var(--shadow) var(--second-color);
+  color: var(--second-color);
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.form.active {
+  z-index: 20;
+  opacity: 1;
+  display: flex;
+}
+
+label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+label.chose {
+  transform: scale(1.5);
+  color: var(--second-color);
+}
+
+label.notchose {
+  color: red;
+}
+
+.form-input,
+.form-over {
+  border-bottom: 1px solid var(--second-color);
+  background-color: transparent;
+  color: var(--second-color);
+  transition: 0.3s;
+}
+
+.form-input.invalid {
+  transform: scale(1.2);
+  border-bottom: 1px solid red;
+}
+
+.form-button {
+  cursor: pointer;
+  padding: calc(var(--short-padding) / 2);
+  background-color: var(--second-color);
+  color: var(--main-color);
+  font: var(--font-secondary) "orbitron-regular", sans-serif;
+}
+
+.input-title {
+  position: absolute;
+  bottom: 0;
+  color: var(--second-color);
+  transition: 0.5s;
+}
+
+.input-title.invalid {
+  color: red;
+}
+
+.input-title.focused {
+  bottom: 100%;
+  transform: scale(0.6);
+  opacity: 0.5;
+}
+
+.form-input[type="radio"] {
+  display: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  position: relative;
+  margin: 3px;
+}
+
+.wrapper > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  font-size: 1.5em;
+  z-index: 40;
+  background-color: green;
+}
